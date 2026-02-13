@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💌 Valentine Invitation</title>
+  <style>
+    :root{
+      --bg1:#fff0f6;
+      --bg2:#ffe4ee;
+      --card:#ffffff;
+      --text:#2b2b2b;
+      --accent:#ff4d7d;
+      --accent2:#ff7aa2;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background: radial-gradient(circle at top, var(--bg1), var(--bg2));
+      overflow:hidden;
+      padding:24px;
+    }
+
+    .hearts{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:0.25;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,77,125,.35) 0 6px, transparent 7px),
+        radial-gradient(circle at 70% 30%, rgba(255,122,162,.35) 0 5px, transparent 6px),
+        radial-gradient(circle at 40% 80%, rgba(255,77,125,.25) 0 7px, transparent 8px);
+      filter: blur(0.3px);
+    }
+
+    .card{
+      width:min(520px, 100%);
+      background:var(--card);
+      border-radius:24px;
+      padding:28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.12);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .badge{
+      display:flex;
+      align-items:center;
+      justify-content:center;   /* centers text inside */
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,77,125,.12);
+      color: var(--accent);
+      font-weight:700;
+      font-size:14px;
+      width: fit-content;       /* prevents full width */
+      margin: 0 auto;           /* ⭐ centers badge */
+    }
+    h1{
+      margin:16px 0 8px;
+      font-size:32px;
+      line-height:1.1;
+      text-align:center;      /* ⭐ ADD THIS */
+    }
+
+    p{
+      margin:8px 0 0;
+      font-size:16px;
+      line-height:1.5;
+      opacity:.92;
+    }
+
+    .details{
+      margin-top:18px;
+      padding:14px;
+      border-radius:16px;
+      background: rgba(255,77,125,.06);
+      border: 1px solid rgba(255,77,125,.12);
+      display:grid;
+      gap:10px;
+    }
+
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      font-size:15px;
+    }
+    .label{ opacity:.75; }
+    .value{ font-weight:700; }
+
+    .actions{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      position:relative;
+    }
+
+    button{
+      border:none;
+      cursor:pointer;
+      border-radius:14px;
+      padding:12px 18px;
+      font-weight:800;
+      font-size:16px;
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      user-select:none;
+    }
+
+    #yesBtn{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:white;
+      box-shadow: 0 14px 30px rgba(255,77,125,.35);
+    }
+    #yesBtn:hover{ transform: translateY(-2px); }
+
+    #noBtn{
+      background:#f3f3f3;
+      color:#333;
+    }
+    #noBtn:hover{ transform: translateY(-2px); }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,0,0,.35);
+      padding:24px;
+    }
+    .modalContent{
+      width:min(520px, 100%);
+      background:white;
+      border-radius:22px;
+      padding:22px;
+      box-shadow:0 20px 70px rgba(0,0,0,.22);
+      text-align:center;
+    }
+    .modalContent h2{ margin:0 0 8px; }
+    .modalContent p{ margin:0 0 16px; }
+    .closeBtn{
+      background:#111;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:800;
+    }
+
+    .tiny{
+      margin-top:10px;
+      font-size:12px;
+      opacity:.7;
+    }
+    .photo{
+      width: min(220px, 70%);
+      height: 160px;              /* ⭐ control height here */
+      object-fit: cover;          /* ⭐ prevents distortion */
+      display:block;
+      margin: 12px auto 6px;
+      border-radius:16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.12);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hearts"></div>
+
+  <main class="card">
+    <div class="badge">💌 Valentine Invite</div>
+
+    <h1><span id="name">My pookie bear 💖</span></h1>
+
+    <img src="image1.jpg" alt="Us 💖" class="photo" />
+
+    <section class="details">
+      <div class="row">
+        <div class="label">📅 Date</div>
+        <div class="value" id="dateText">14 Feb</div>
+      </div>
+      <div class="row">
+        <div class="label">⏰ Time</div>
+        <div class="value" id="timeText">7:00 PM</div>
+      </div>
+      <div class="row">
+        <div class="label">📍 Place</div>
+        <div class="value" id="placeText">Your favorite spot</div>
+      </div>
+      <div class="row">
+        <div class="label">✨ Plan</div>
+        <div class="value" id="planText">Dinner + dessert</div>
+      </div>
+    </section>
+
+    <div class="actions" id="actions">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 🙈</button>
+    </div>
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="modalContent">
+      <h2>YAY!! 💖</h2>
+      <p id="resultText">See you on 15 Feb at 7:00 PM 😌</p>
+      <button class="closeBtn" id="closeBtn">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // ======= QUICK PERSONALIZATION (edit these) =======
+    const PERSON_NAME = "My pookie bear 💖";
+    const DATE = "15 Feb";
+    const TIME = "7:00 PM";
+    const PLACE = "Somewhere cozy";
+    const PLAN = "Dinner + dessert";
+
+    // Apply personalization
+    document.getElementById("name").textContent = PERSON_NAME;
+    document.getElementById("dateText").textContent = DATE;
+    document.getElementById("timeText").textContent = TIME;
+    document.getElementById("placeText").textContent = PLACE;
+    document.getElementById("planText").textContent = PLAN;
+
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const modal = document.getElementById("modal");
+    const resultText = document.getElementById("resultText");
+    const closeBtn = document.getElementById("closeBtn");
+
+    yesBtn.addEventListener("click", () => {
+      resultText.textContent = `See you on ${DATE} at ${TIME} 💘`;
+      modal.style.display = "flex";
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    // Playful "No" button: moves away
+    noBtn.addEventListener("mouseenter", () => {
+      const padding = 20;
+      const btnRect = noBtn.getBoundingClientRect();
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      const newLeft = Math.random() * (vw - btnRect.width - padding * 2) + padding;
+      const newTop  = Math.random() * (vh - btnRect.height - padding * 2) + padding;
+
+      noBtn.style.position = "fixed";
+      noBtn.style.left = `${newLeft}px`;
+      noBtn.style.top = `${newTop}px`;
+      noBtn.style.boxShadow = "0 10px 25px rgba(0,0,0,.12)";
+    });
+
+    // Also move on click (mobile friendliness)
+    noBtn.addEventListener("click", () => {
+      noBtn.dispatchEvent(new Event("mouseenter"));
+    });
+
+    // Click outside modal to close
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💘 Quick Question</title>
+  <style>
+    :root{
+      --bg1:#fff0f6;
+      --bg2:#ffe4ee;
+      --card:#ffffff;
+      --text:#2b2b2b;
+      --accent:#ff4d7d;
+      --accent2:#ff7aa2;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background: radial-gradient(circle at top, var(--bg1), var(--bg2));
+      padding:24px;
+    }
+    .card{
+      width:min(520px, 100%);
+      background:var(--card);
+      border-radius:24px;
+      padding:28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.12);
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,77,125,.12);
+      color: var(--accent);
+      font-weight:700;
+      font-size:14px;
+    }
+    h1{ margin:14px 0 8px; font-size:30px; line-height:1.1; }
+    p{ margin:8px 0 0; font-size:16px; line-height:1.5; opacity:.92; }
+
+    .actions{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    button{
+      border:none;
+      cursor:pointer;
+      border-radius:14px;
+      padding:12px 18px;
+      font-weight:900;
+      font-size:16px;
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      user-select:none;
+    }
+    #yesBtn{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:white;
+      box-shadow: 0 14px 30px rgba(255,77,125,.35);
+    }
+    #yesBtn:hover{ transform: translateY(-2px); }
+
+    #noBtn{
+      background:#f3f3f3;
+      color:#333;
+    }
+    #noBtn:hover{ transform: translateY(-2px); }
+
+    .footer{
+      margin-top:18px;
+      text-align:center;
+      font-size:13px;
+      opacity:.7;
+    }
+    #question{
+      font-size: 24px;
+    }
+    .sticker{
+      width: 180px;          /* adjust size here */
+      margin: 18px 0;        /* spacing above & below */
+    }
+    
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="badge">💌 Tiny question</div>
+    <h1 id = "baby">Hey Baby💘~</h1>
+    <h1 id = "question">Are you free on <span id="dateText">15 Feb</span> for dinner? 🍽️</h1>
+    <p>Choose your answer wisely...🧐</p>
+    <img src="firstSticker.webp" alt="Cute sticker" class="sticker" />
+    <div class="actions">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 🙈</button>
+    </div>
+
+  </main>
+
+  <script>
+    // Edit these if you want
+    const DATE = "15 Feb";
+
+    document.getElementById("dateText").textContent = DATE;
+
+    document.getElementById("yesBtn").addEventListener("click", () => {
+      // go to invitation page
+      window.location.href = "valentine.html";
+    });
+
+    document.getElementById("noBtn").addEventListener("click", () => {
+      // go to "pretty please" page
+      window.location.href = "secondpage.html";
+    });
+  </script>
+</body>
+</html>
